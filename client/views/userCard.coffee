@@ -3,7 +3,7 @@ Template.userCard.helpers
     if @profile.firstName && @profile.lastName
       "#{@profile.firstName} #{@profile.lastName}"
     else
-      ""
+      @profile.name
 
   subhead: ->
     if @profile.organization && @profile.location
@@ -16,6 +16,4 @@ Template.userCard.helpers
 
   bio: -> @profile.bio
   url: -> @profile.url
-  googlePlusUrl: -> @profile.googlePlusUrl
-  twitterHandle: -> @profile.twitterHandle
 

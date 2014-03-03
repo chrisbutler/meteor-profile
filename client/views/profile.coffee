@@ -6,8 +6,8 @@ Template.profile.rendered = ->
 
 Template.profile.helpers
   email:         -> Meteor.user().emails[0].address if Meteor.user().emails?
-  firstName:     -> Meteor.user().profile.firstName
-  lastName:      -> Meteor.user().profile.lastName
+  name:          -> Meteor.user().profile.name
+  username:          -> Meteor.user().profile.username
   organization:  -> Meteor.user().profile.organization
   location:      -> Meteor.user().profile.location
   bio:           -> Meteor.user().profile.bio
@@ -17,23 +17,23 @@ Template.profile.helpers
 
 Template.profile.events
   'click .done': ->
-    if Meteor.user().profile.firstName
+    if Meteor.user().profile.name
       Router.go('/')
     else
-      $('.errors').text('First name is required.')
+      $('.errors').text('Name is required.')
 
   'change #email': (event) ->
     Meteor.call('changeEmail', Meteor.userId(), $(event.target).val())
 
-  'change #firstName': (event) ->
+  'change #name': (event) ->
     Meteor.users.update Meteor.userId(),
       $set:
-        'profile.firstName': $(event.target).val()
-
-  'change #lastName': (event) ->
+        'profile.name': $(event.target).val()
+  
+  'change #username': (event) ->
     Meteor.users.update Meteor.userId(),
       $set:
-        'profile.lastName': $(event.target).val()
+        'profile.username': $(event.target).val()
 
   'change #organization': (event) ->
     Meteor.users.update Meteor.userId(),
@@ -57,16 +57,3 @@ Template.profile.events
     Meteor.users.update Meteor.userId(),
       $set:
         'profile.url': url
-
-  'change #googlePlusUrl': (event) ->
-    url = $(event.target).val()
-    if not url.match(/^http/) and not url.match(/^https/) and url isnt ''
-      url = 'http://' + url
-    Meteor.users.update Meteor.userId(),
-      $set:
-        'profile.googlePlusUrl': url
-
-  'change #twitterHandle': (event) ->
-    Meteor.users.update Meteor.userId(),
-      $set:
-        'profile.twitterHandle': $(event.target).val()
