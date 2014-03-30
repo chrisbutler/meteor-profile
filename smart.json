@@ -4,8 +4,5 @@
   "homepage": "https://github.com/BeDifferential/meteor-profile",
   "author": "Differential (http://differential.io)",
   "version": "0.0.8",
-  "git": "https://github.com/BeDifferential/meteor-profile.git",
-  "packages": {
-    "iron-router": "0.6.4"
-  }
+  "git": "https://github.com/BeDifferential/meteor-profile.git"
 }
