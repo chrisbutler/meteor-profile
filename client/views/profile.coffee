@@ -1,7 +1,7 @@
 Template.profile.rendered = ->
-  $('#bio').keydown( (event) ->
+  $('textarea').keydown( (event) ->
     if event.keyCode == 13
-      $('#bio').blur()
+      $(event.target).blur()
   )
 
 Template.profile.helpers
@@ -11,6 +11,7 @@ Template.profile.helpers
   organization:  -> Meteor.user().profile.organization
   location:      -> Meteor.user().profile.location
   bio:           -> Meteor.user().profile.bio
+  embedCSS:           -> Meteor.user().profile.embedCSS
   url:           -> Meteor.user().profile.url
   googlePlusUrl: -> Meteor.user().profile.googlePlusUrl
   twitterHandle: -> Meteor.user().profile.twitterHandle
@@ -49,6 +50,11 @@ Template.profile.events
     Meteor.users.update Meteor.userId(),
       $set:
         'profile.bio': $(event.target).val()
+
+  'change #embed-css': (event) ->
+    Meteor.users.update Meteor.userId(),
+      $set:
+        'profile.embedCSS': $(event.target).val()
 
   'change #url': (event) ->
     url = $(event.target).val()

@@ -14,6 +14,7 @@ Template.userCard.helpers
       if @profile.location
         return @profile.location
 
+  avatar: -> @profile.avatar
   bio: -> @profile.bio
   url: -> @profile.url
 
